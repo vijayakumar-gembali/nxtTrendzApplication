@@ -13,13 +13,20 @@ import CartContext from './context/CartContext'
 import './App.css'
 
 class App extends Component {
-  state = {
+  state = JSON.parse(window.localStorage.getItem('state')) || {
     cartList: [],
+  }
+  
+  
+  setState(state) {
+    window.localStorage.setItem('state', JSON.stringify(state));
+    super.setState(state);
   }
 
   removeAllCartItems = () => {
     this.setState({cartList: []})
   }
+  
 
   incrementCartItemQuantity = id => {
     this.setState(prevState => ({
